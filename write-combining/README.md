@@ -29,7 +29,7 @@ write-combining 6 3
 write-combining 6 6 
 ```
 
-You can use the provided `benchmark.py` script to test various `thread-count/increment` combinations
+You can use the provided `benchmark.py` script to test various `array-count/write-increment` combinations
 and plot their relative speeds.
 
 ```bash

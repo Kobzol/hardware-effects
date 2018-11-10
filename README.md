@@ -1,11 +1,15 @@
 # Hardware effects
 This repository demonstrates various hardware effects that may be very hard to explain
-if you don't know the how the low-level CPU and OS architecture works.
+if you don't know the how the low-level CPU and OS architecture works. I try to create proof of concept
+programs that are as small as possible for each effect.
 
 Currently the following effects are demonstrated:
 
+- branch misprediction
+- branch target misprediction
 - cache aliasing
-- false sharing 
+- false sharing
+- write combining
 
 Every example directory has a README that explains the individual effect.
 
