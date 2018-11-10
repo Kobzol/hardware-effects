@@ -5,3 +5,4 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_subdirectory(cache-aliasing)
 add_subdirectory(false-sharing)
+add_subdirectory(write-combining)

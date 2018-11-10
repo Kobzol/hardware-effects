@@ -5,12 +5,12 @@ CPU caches are basically hardware hash tables, so they suffer from hash table co
 If you access memory in specific address intervals, you can observe significant
 slow down, because the cache lines will be mapped onto the same cache bucket.
 
-The program will write to `count` 4-byte integers many times, each of which will be `increment` bytes apart.
-
 Usage:
 ```bash
 $ cache-aliasing <count> <increment>
 ```
+
+The program will write to `count` 4-byte integers many times, each of which will be `increment` bytes apart.
 
 You can use the provided `benchmark.py` script to test various `count/increment` combinations
 and plot their relative speeds.
