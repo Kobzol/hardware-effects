@@ -1,16 +1,12 @@
 ## Write combining
 This example demonstrates write combining present in modern processors.
-CPUs have write combining buffers that try to fill a whole cache line before sending it for a write into cache/memory
-to reduce bus bandwidth/usage.
+CPUs have write combining buffers that try to fill a whole cache line before sending it
+for a write into cache/memory to reduce bus bandwidth stress/usage.
 
 The number of WC buffers is of course limited, so you get their benefit only when writing to a small number of 
-memory streams concurrently.
-
-This effect is a bit hard to observe directly, but I'm confident that this program can demonstrate it,
-because for example `count 6, increment 3` is consistently faster than `count 6, increment 6` on my CPU
-even though it has more LLC and L1i cache misses (measured by `perf stat`, YMMV). The effect depends on the
-number of write combine buffers in your CPU, common number is somewhere between 4 and 10.
-I suggest trying combinations `6/3, 6/6, 8/4, 8/8` and so on.
+memory streams concurrently. For example if you have 4 wc buffers, you can write to 4 different arrays
+repeatedly and the writes should be buffered by the WC buffers. If you write to 5 arrays at once,
+one of the writes will not benefit from the write combining.
 
 Usage:
 ```bash
@@ -22,12 +18,22 @@ The program will create `array-count` large arrays of 8-bytes integers and will 
 
 Example:
 ```
-# creates 6 arrays, first writes to all elements of arrays 0,1,2 and then writes to all elements of arrays 3,4,5
+# creates 6 arrays, first writes to all elements of array 0, then writes to all elements of array 1 etc.
+write-combining 6 1
+
+# creates 6 arrays, first writes to all elements of arrays 0,1,2, then writes to all elements of arrays 3,4,5
 write-combining 6 3
 
 # creates 6 array, writes to all elements of arrays 0,1,2,3,4,5
 write-combining 6 6 
 ```
+
+It is a bit hard to create a demonstration of this effect, but I'm confident that this program's slowdown
+can be explained by it. On my computer `count 6, increment 3` is consistently faster than `count 6, increment 6`
+on my CPU even though it has more LLC and L1i cache misses (measured by `perf stat`, YMMV). The effect depends on the
+number of write combine buffers in your CPU, common number is somewhere between 4 and 10.
+I suggest trying combinations `6/3, 6/6, 8/4, 8/8` and so on.
+
 
 You can use the provided `benchmark.py` script to test various `array-count/write-increment` combinations
 and plot their relative speeds.
