@@ -5,6 +5,8 @@ This information is vital for performance because the CPU instruction pipeline m
 If you sort your data in a way that makes a frequently executed branch easily predictable,
 you could gain a significant performance advantage.
 
+Branch mispredictions belong to a group of control hazards that can affect pipeline execution (there are also data and structural hazards).
+
 Usage:
 ```bash
 $ branch-misprediction <sort>

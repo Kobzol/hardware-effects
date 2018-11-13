@@ -28,6 +28,8 @@ so for example I left out NUMA effects.
 Isolating those hardware effects can be very tricky, so it's possible that some of the
 examples are actually demonstrating something entirely else (or nothing at all :) ).
 If you have a better explanation of what is happening, please let me know in the issues.
+Ideally the code should be written in assembly, however that would lower it's readability.
+I wrote it in C++ in a way that (hopefully) forces the compiler to emit the instructions that I want (even with -O3).
 
 ### Build
 ```bash
