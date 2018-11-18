@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_subdirectory(branch-misprediction)
 add_subdirectory(cache-aliasing)
+add_subdirectory(cache-hierarchy-bandwidth)
 add_subdirectory(cache-memory-bound)
 add_subdirectory(data-dependency)
 add_subdirectory(false-sharing)

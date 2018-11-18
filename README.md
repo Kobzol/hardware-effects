@@ -15,6 +15,7 @@ Currently the following effects are demonstrated:
 - branch misprediction
 - branch target misprediction
 - cache aliasing
+- cache/memory hierarchy bandwidth
 - memory-bound program
 - data dependencies
 - false sharing
@@ -22,7 +23,7 @@ Currently the following effects are demonstrated:
 
 Every example directory has a README that explains the individual effects.
 
-All programs print their execution time to the standard error output (`stderr`).
+All programs print measured results (execution time, bandwidth) to the standard error output (`stderr`).
 
 I try to focus on effects that should be observable on commodity (desktop/notebook) hardware,
 so for example I left out NUMA effects.
@@ -54,3 +55,4 @@ MIT
 - http://igoro.com/archive/gallery-of-processor-cache-effects/
 - https://mechanical-sympathy.blogspot.com
 - https://manybutfinite.com/category/software-illustrated/
+- https://akkadia.org/drepper/cpumemory.pdf
