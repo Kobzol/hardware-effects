@@ -28,11 +28,14 @@ write-combining 6 3
 write-combining 6 6 
 ```
 
-It is tricky to demonstrate this effect, but I'm confident that this program's slowdown
+It is tricky to demonstrate this effect, but I think that this program's slowdown
 can be explained by it. On my computer `count 6, increment 3` is consistently faster than `count 6, increment 6`
-even though it has more LLC and L1i cache misses (measured by `perf stat`, YMMV). The effect depends on the
+even though it does more work (increments the loop counter twice instead of once per each element) and
+has more LLC and L1i cache misses (measured by `perf stat`, YMMV). The effect depends on the
 number of write combine buffers in your CPU, common number is somewhere between 4 and 10.
 I suggest trying combinations `6/3, 6/6, 8/4, 8/8` and so on.
+However I suspect that this slowdown could also have something to do with the number of streams that the hardware
+prefetcher can follow.
 
 
 You can use the provided `benchmark.py` script to test various `array-count/write-increment` combinations

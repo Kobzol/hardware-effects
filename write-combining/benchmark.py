@@ -12,7 +12,7 @@ from utils import benchmark
 
 data = [
     ("Count", [6]),
-    ("Increment", [3, 6])
+    ("Increment", list(range(1, 7)))
 ]
 
 frame = benchmark(data, pin_to_cpu=True)

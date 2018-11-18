@@ -4,9 +4,10 @@
 #include <cassert>
 #include <vector>
 #include <cstring>
+#include <xmmintrin.h>
 
-#define ARRAY_SIZE 20 * 1024 * 1024
-#define REPEAT 25
+#define ARRAY_SIZE 8 * 1024 * 1024
+#define REPEAT 20
 
 using Type = size_t;
 using Clock = std::chrono::steady_clock;
@@ -55,6 +56,8 @@ int main(int argc, char** argv)
             {
                 for (int i = region.first; i < region.second; i++)
                 {
+                    // non-temporal store, bypasses cache
+                    // _mm_stream_pi((__m64*) &arrays[i][l], reinterpret_cast<__m64>(static_cast<Type>(l)));
                     arrays[i][l] = static_cast<Type>(l);
                 }
             }
