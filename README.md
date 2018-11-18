@@ -47,3 +47,8 @@ $ pip install -r requirements.txt
 
 ### License
 MIT
+
+### Resources
+- http://igoro.com/archive/gallery-of-processor-cache-effects/
+- https://mechanical-sympathy.blogspot.com
+- https://manybutfinite.com/category/software-illustrated/
