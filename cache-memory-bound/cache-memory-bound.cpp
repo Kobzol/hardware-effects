@@ -8,7 +8,7 @@
 #define REPETITIONS 10
 #define SIZE 32 * 1024 * 1024
 
-using Type = size_t;
+using Type = int;
 
 void test_memory(std::vector<Type>& memory, int increment)
 {

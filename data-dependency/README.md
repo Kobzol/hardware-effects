@@ -13,18 +13,18 @@ $ data-dependency <version>
 ```
 
 The program will repeatedly accumulate elements from a large array either to a single number (`version=0`)
-or to four numbers (`version=1` - the four subresults are summed at the end, so the results should be the same).
+or to four different numbers that are then summed at the end(`version=1`).
 
 Even though the CPU does the same amount of work with the same result, you should observe that version 1 is much faster.
 When you want to add a number to the same memory location repeatedly, the CPU has to wait until the
-previous operation has completed before starting the next add. However when you write to more memory locations at once,
+previous operation has completed before starting the next addition. However when you write to more memory locations at once,
 it can be done in parallel, because there are less data dependencies.
 
-I recommend to use float/double data type, because the floating point model has restricted associativity because
+I recommend to use `float` or `double` as the data type, because the floating point model has restricted associativity because
 of the limited precision and that should prevent the compiler from doing funky stuff like optimizing away the additions
-into a single operation (that happens here with `gcc -O3` if you use ints for example).
+into a single operation (that happens here with `gcc -O3` if you use `int`).
 
-You can use the provided `benchmark.py` script to test the two versions their relative speeds.
+You can use the provided `benchmark.py` script to test the speeds of the two versions.
 
 ```bash
 $ python3 benchmark.py <path-to-executable>

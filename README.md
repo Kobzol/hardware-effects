@@ -7,7 +7,7 @@ be understood easily.
 Those effects obviously depend heavily on your CPU microarchitecture and model,
 so the demonstration programs may not showcase the slowdown on your CPU, but I try to make
 them as general as I can. That said, the examples are targeting x86-x64 processors (Intel and AMD)
-and may not make sense on other CPU architectures. I try to also make them compatible
+and may not make sense on other CPU architectures. I try to make them compatible
 with Windows, but they are mainly tested on Linux.
 
 Currently the following effects are demonstrated:
@@ -15,12 +15,14 @@ Currently the following effects are demonstrated:
 - branch misprediction
 - branch target misprediction
 - cache aliasing
+- memory-bound program
+- data dependencies
 - false sharing
 - write combining
 
 Every example directory has a README that explains the individual effects.
 
-All programs print the duration of their execution to the standard error output (`stderr`).
+All programs print their execution time to the standard error output (`stderr`).
 
 I try to focus on effects that should be observable on commodity (desktop/notebook) hardware,
 so for example I left out NUMA effects.

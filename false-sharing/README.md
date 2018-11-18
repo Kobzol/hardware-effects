@@ -9,7 +9,7 @@ primitives like locks, memory fences, atomic increments, CAS etc.
 If a thread T1 accesses a cache line that is in T2's cache, the cache line has to be transferred from T2 to T1 and invalidated
 for T2. If this happens very often in short timespans it can significantly degrade performance of your program.
 It is therefore important to align data so that if nearby things are accessed by different threads,
-the individual data items should be placed on different cache lines.
+the individual data items are be placed on different cache lines.
 
 Usage:
 ```bash
@@ -23,7 +23,7 @@ in memory (on the same cache line), while `increment 8` means that each integer 
 
 You should observe significant slowdown when using `increment 1` with more than one thread.
 On the other hand if every thread gets its own cache line (`increment 8`), the time shouldn't
-change much if you keep adding threads.
+change much if you keep adding threads (up to the point where you spawn more threads than you have logical cores of course).
 
 You can use the provided `benchmark.py` script to test various `thread-count/increment` combinations
 and plot their relative speeds.
