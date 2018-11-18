@@ -19,6 +19,7 @@ Currently the following effects are demonstrated:
 - memory-bound program
 - data dependencies
 - false sharing
+- software prefetching
 - write combining
 
 Every example directory has a README that explains the individual effects.
