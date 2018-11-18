@@ -2,9 +2,10 @@ import itertools
 import os
 import platform
 import subprocess
-
-import pandas
 import sys
+
+import __main__
+import pandas
 
 
 def get_args(executable, parameters, pin_to_cpu):
@@ -24,7 +25,7 @@ def get_args(executable, parameters, pin_to_cpu):
 
 def benchmark(input_data, pin_to_cpu=False, repeat=5):
     if len(sys.argv) < 2:
-        print("Usage: python3 benchmark.py <path-to-executable>")
+        print("Usage: python3 {} <path-to-executable>".format(__main__.__file__))
         exit(1)
 
     executable = os.path.realpath(sys.argv[1])
