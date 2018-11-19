@@ -7,7 +7,7 @@
 #include <cstring>
 #include <xmmintrin.h>
 
-#if defined(__clang__) && defined(__APPLE__)
+#if defined(__clang__)
 using _mm_hint = uint8_t;
 #endif
 
@@ -32,7 +32,7 @@ size_t test_memory(const std::vector<Type*>& memory, int distance)
 
     for (int i = 0; i < REPETITIONS; i++)
     {
-        for (int j = 0; j < size; j++)
+        for (size_t j = 0; j < size; j++)
         {
             if (Prefetch) _mm_prefetch(memory[j + distance], Hint);
             memory[j]->data[0] += sum;
