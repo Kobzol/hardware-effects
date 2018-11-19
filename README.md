@@ -20,6 +20,7 @@ Currently the following effects are demonstrated:
 - data dependencies
 - false sharing
 - software prefetching
+- hardware prefetching
 - write combining
 
 Every example directory has a README that explains the individual effects.

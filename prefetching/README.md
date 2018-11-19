@@ -10,6 +10,34 @@ stored (just L1 cache, all caches etc.).
 Software prefetching can however also hurt performance and it's hard to find the right prefetch distance. It shouldn't
 be too soon (otherwise the cache line might get evicted before it's accesses) nor too late (otherwise it won't help).
 
+### Random accesses
+Usage:
+```bash
+$ random-accesses <shuffle> <size>
+```
+This example demonstrates the performance difference between sequential and random accesses to memory.
+In the sequential case, the hardware prefetcher can hide most of the latency by prefetching the required cache lines
+beforehand.
+
+The program will allocated an array of integers of `size` bytes. Then it will create an array of pointers to each individual
+elements. If `shuffle` is 1, the pointers will be randomly shuffled. If `shuffle` is 0, the first pointer will point to the first
+element, the second pointer to the second one etc. The pointer array is then repeatedly iterated from the beginning
+to the end and the pointed elements are accumulated into a variable.
+
+When the `size` stays small, there shouldn't be many differences between the shuffled and sequential accesses, because
+the array will fit into the L1 cache. However when the `size` goes up, the cache won't be able to help much by itself.
+That's where the hardware prefetcher effect should be observable - the shuffled version should be much slower with
+bigger array size.
+
+You can use the provided `random-accesses.py` script to plot the various shuffle/size combinations and their
+speeds.
+
+```bash
+$ python3 random-accesses.py <path-to-executable>
+```
+
+
+### Software prefetching
 Usage:
 ```bash
 $ prefetching <prefetch> <distance> <hint>
@@ -32,11 +60,11 @@ cache. However those are just hints and are implementation specific.
 
 On my CPU I can see significant (2x) speedup when using prefetch distance 10/15/20.
 
-You can use the provided `benchmark.py` script to plot the various prefetch/distance/hint combination and their
+You can use the provided `benchmark.py` script to plot the various prefetch/distance/hint combinations and their
 speeds.
 
 ```bash
-$ python3 benchmark.py <path-to-executable>
+$ python3 software-prefetching.py <path-to-executable>
 ```
 
 More about hardware and software prefetching can be found here:
