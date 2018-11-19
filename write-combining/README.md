@@ -1,4 +1,8 @@
 ## Write combining
+> (**Inconclusive**) As noted by [this issue](https://github.com/Kobzol/hardware-effects/issues/1), this is probably not actually
+caused by write combining. If you have a better idea (number of parallel streams that the hardware prefetcher can handle?),
+please let me know!
+
 This example demonstrates write combining present in modern processors.
 CPUs have write combining buffers that try to fill a whole cache line before sending it
 for a write into cache/memory to reduce bus bandwidth stress/usage.
