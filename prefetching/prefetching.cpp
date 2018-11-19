@@ -49,6 +49,12 @@ size_t test_memory(const std::vector<Type*>& memory, int distance)
 
 int main(int argc, char** argv)
 {
+    if (argc < 3)
+    {
+        std::cout << "Usage: prefetching <prefetch> <distance> <hint>" << std::endl;
+        return 1;
+    }
+
     std::default_random_engine rng;
     rng.seed(0);
 
