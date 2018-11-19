@@ -11,7 +11,7 @@ $ bandwidth-saturation <non-temporal> <thread-count>
 
 The program will create `thread-count` threads. Each thread will have its own large array of numbers and it will
 repeatedly write to all of its elements. If `non-temporal` is 1, the threads will use non-temporal stores to write to their
-arrays, so they will not use the cache. If `non-temporal` is 0, the threads will use classis memory writes.
+arrays, so they will not use the cache. If `non-temporal` is 0, the threads will use classic memory writes.
 
 With the non-temporal stores, one could expect that since the threads operate on separate arrays, adding more
 threads (up to the physical core count of course) shouldn't affect the execution time much. You should indeed observe
