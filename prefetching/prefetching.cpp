@@ -6,6 +6,11 @@
 #include <algorithm>
 #include <cstring>
 
+#if defined(__clang__) && defined(__APPLE__)
+#include <xmmintrin.h>
+using _mm_hint = uint8_t;
+#endif
+
 #define REPETITIONS 5
 #define SIZE 10 * 1024 * 1024
 

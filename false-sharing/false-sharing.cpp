@@ -43,7 +43,7 @@ int main(int argc, char** argv)
     }
     assert(((uintptr_t)memory & 0x3F) == 0);
 #else
-    memory = malloc(totalSize);
+    memory = static_cast<size_t*>(malloc(totalSize));
 #endif
 
     using Clock = std::chrono::system_clock;
