@@ -5,6 +5,7 @@
 #include <random>
 #include <algorithm>
 #include <cstring>
+#include <xmmintrin.h>
 
 #define REPETITIONS 5
 #define SIZE 10 * 1024 * 1024
