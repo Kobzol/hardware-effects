@@ -49,6 +49,25 @@ also install the Python dependencies:
 $ pip install -r requirements.txt
 ```
 
+### Docker
+You can download a prebuilt image:
+```bash
+$ docker pull kobzol/hardware-effects
+```
+or build it yourself:
+```bash
+$ docker build -t hardware-effects .
+```
+
+Then run it:
+```bash
+# interactive run
+$ docker run --rm -it hardware-effects
+
+# directly launch a program
+$ docker run hardware-effects build/branch-misprediction/branch-misprediction 1
+```
+
 ### License
 MIT
 
