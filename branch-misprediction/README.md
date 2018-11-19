@@ -51,6 +51,17 @@ instances of `B` or `C` (chosen randomly). Then the program repeatedly goes over
 the performance should degrade. It is caused by the fact that the branch target predictor will be able to predict the
 target virtual method much better if the array is sorted by instance type (class).
 
+Perf output for the branch target misprediction program on my computer:
+```bash
+$  perf stat -e branch-misses branch-target-misprediction 0
+877
+63 329 025      branch-misses
+
+$  perf stat -e branch-misses branch-target-misprediction 1
+792
+16 139 166      branch-misses
+```
+
 You can use the provided `benchmark.py` script to plot the relative speeds of the sort/nosort variant.
 
 ```bash
