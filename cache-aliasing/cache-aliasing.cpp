@@ -36,7 +36,7 @@ int main(int argc, char** argv)
     size_t count = static_cast<size_t>(std::stoi(argv[1]));
     size_t increment = static_cast<size_t>(std::stoi(argv[2]));
 
-    auto memory = std::make_unique<int[]>(count * increment);
+    auto memory = std::unique_ptr<int[]>(new int[count * increment]());
     auto startAddress = reinterpret_cast<size_t>(memory.get());
 
     std::vector<int*> data;
