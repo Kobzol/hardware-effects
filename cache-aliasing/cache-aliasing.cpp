@@ -15,7 +15,7 @@ void test_memory(const std::vector<int*>& memory)
 
     for (int i = 0; i < REPETITIONS; i++)
     {
-        for (int j = 0; j < size; j++)
+        for (size_t j = 0; j < size; j++)
         {
             *memory[j] += j;
         }
@@ -41,7 +41,7 @@ int main(int argc, char** argv)
 
     std::vector<int*> data;
 
-    for (int i = 0; i < count; i++)
+    for (size_t i = 0; i < count; i++)
     {
         data.push_back((int*)(startAddress + i * increment));
     }

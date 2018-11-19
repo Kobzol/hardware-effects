@@ -29,7 +29,7 @@ size_t test_memory(const std::vector<int>& memory, int value)
 
     for (int i = 0; i < REPETITIONS; i++)
     {
-        for (int j = 0; j < size; j++)
+        for (size_t j = 0; j < size; j++)
         {
             if (memory[j] < value) handle_sum(&sum, memory.data() + j);
         }

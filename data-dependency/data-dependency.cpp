@@ -18,7 +18,7 @@ void test_memory(std::vector<Type>& memory, const std::vector<Type>& src)
 
     for (int i = 0; i < REPETITIONS; i++)
     {
-        for (int j = 0; j < size - 1; j++)
+        for (size_t j = 0; j < size - 1; j++)
         {
             if (VERSION == 0)
             {

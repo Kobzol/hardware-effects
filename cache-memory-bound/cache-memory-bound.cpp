@@ -19,7 +19,7 @@ void test_memory(std::vector<Type>& memory, int increment)
 
     for (int i = 0; i < REPETITIONS; i++)
     {
-        for (int j = 0; j < size; j += increment)
+        for (size_t j = 0; j < size; j += increment)
         {
             memory[j] *= 5;
         }

@@ -17,7 +17,7 @@ void test_memory(std::vector<Type>& memory)
 
     for (int i = 0; i < REPEAT; i++)
     {
-        for (int j = 0; j < size; j++)
+        for (size_t j = 0; j < size; j++)
         {
             memory[j] = value;
         }
