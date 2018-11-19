@@ -18,6 +18,7 @@ Currently the following effects are demonstrated:
 - cache aliasing
 - cache/memory hierarchy bandwidth
 - data dependencies
+- denormal floating point numbers
 - false sharing
 - hardware prefetching
 - memory-bound program
@@ -75,7 +76,8 @@ $ docker run hardware-effects build/branch-misprediction/branch-misprediction 1
 MIT
 
 ### Resources
+- https://akkadia.org/drepper/cpumemory.pdf
 - http://igoro.com/archive/gallery-of-processor-cache-effects/
 - https://mechanical-sympathy.blogspot.com
 - https://manybutfinite.com/category/software-illustrated/
-- https://akkadia.org/drepper/cpumemory.pdf
+- https://randomascii.wordpress.com/
