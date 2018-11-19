@@ -12,15 +12,17 @@ with Windows, but they are mainly tested on Linux.
 
 Currently the following effects are demonstrated:
 
+- bandwidth saturation
 - branch misprediction
 - branch target misprediction
 - cache aliasing
 - cache/memory hierarchy bandwidth
-- memory-bound program
 - data dependencies
 - false sharing
-- software prefetching
 - hardware prefetching
+- memory-bound program
+- non-temporal stores
+- software prefetching
 - write combining
 
 Every example directory has a README that explains the individual effects.
