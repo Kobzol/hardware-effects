@@ -7,7 +7,7 @@
 #include <xmmintrin.h>
 
 #define COUNT 16 * 1024 * 1024
-#define REPEAT 100
+#define REPEAT 20
 
 using Type = size_t;
 
