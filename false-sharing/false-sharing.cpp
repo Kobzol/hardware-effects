@@ -34,7 +34,9 @@ int main(int argc, char** argv)
     size_t totalSize = threadCount * increment * sizeof(size_t);
 
     size_t* memory;
-#ifdef __linux__
+#ifdef _MSC_VER
+    memory = _aligned_malloc(totalSize, 64);
+#else
     // try to allocate 64-byte aligned memory to make sure that we start on a cache line beginning
     if (posix_memalign((void**) &memory, 64, totalSize))
     {
@@ -42,8 +44,6 @@ int main(int argc, char** argv)
         return 1;
     }
     assert(((uintptr_t)memory & 0x3F) == 0);
-#else
-    memory = static_cast<size_t*>(malloc(totalSize));
 #endif
 
     using Clock = std::chrono::system_clock;
@@ -63,7 +63,11 @@ int main(int argc, char** argv)
     std::cout << memory[0] << std::endl;
     std::cerr << std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - start).count() << std::endl;
 
+#ifdef _MSC_VER
+    _aligned_free(memory);
+#else
     free(memory);
+#endif
 
     return 0;
 }

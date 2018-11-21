@@ -22,6 +22,7 @@ Currently the following effects are demonstrated:
 - false sharing
 - hardware prefetching
 - memory-bound program
+- misaligned accesses
 - non-temporal stores
 - software prefetching
 - write combining
