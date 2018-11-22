@@ -1,10 +1,11 @@
 #include <iostream>
+#include <iomanip>
 #include <chrono>
 #include <thread>
 #include <cassert>
 #include <vector>
 #include <cstring>
-#include <xmmintrin.h>
+#include <immintrin.h>
 
 #define ARRAY_SIZE 2 * 1024 * 1024
 #define REPEAT 20
@@ -57,13 +58,13 @@ int main(int argc, char** argv)
                 for (int i = region.first; i < region.second; i++)
                 {
                     // non-temporal store, bypasses cache
-                    _mm_stream_pi((__m64*) &arrays[i][l], reinterpret_cast<__m64>(static_cast<Type>(l)));
+                    _mm_stream_si64(reinterpret_cast<long long *>(&arrays[i][l]), static_cast<Type>(l));
                 }
             }
         }
     }
 
-    std::cerr << std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - start).count() << std::endl;
+    std::cerr << std::setw(5) << std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - start).count() << std::endl;
 
     return 0;
 }
