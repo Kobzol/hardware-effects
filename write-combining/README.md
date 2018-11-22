@@ -1,13 +1,10 @@
 ## Write combining
-> (**Inconclusive**) As noted by [this issue](https://github.com/Kobzol/hardware-effects/issues/1), this is probably not actually
-caused by write combining. If you have a better idea (number of parallel streams that the hardware prefetcher can handle?),
-please let me know!
+This example demonstrates write combining. CPUs have write combining buffers that try to fill a whole
+cache line before sending it for a write into memory to reduce bus bandwidth stress/usage.
+This only happens for special types of writes (for example writes to videocard memory or non-temporal stores
+that do not go through the cache and write directly to memory).
 
-This example demonstrates write combining present in modern processors.
-CPUs have write combining buffers that try to fill a whole cache line before sending it
-for a write into cache/memory to reduce bus bandwidth stress/usage.
-
-The number of WC buffers is of course limited, so you get their benefit only when writing to a small number of 
+The number of WC buffers is limited, so you get their benefit only when writing to a small number of 
 memory streams concurrently. For example if you have 4 WC buffers, you can write to 4 different arrays
 repeatedly and the writes should be buffered by the WC buffers. If you write to 5 arrays at once,
 one of the writes will not benefit from the write combining.
@@ -17,8 +14,8 @@ Usage:
 $ write-combining <array-count> <write-increment>
 ```
 
-The program will create `array-count` large arrays of 8-bytes integers and will repeatedly write to all of their elements.
-`write-increment` specifies how many arrays will be written at once in a loop from zero to the array size.
+The program will create `array-count` large arrays of 8-bytes integers and will repeatedly write to all of their elements
+using non-temporal stores. `write-increment` specifies how many arrays will be written at once in a loop from zero to the array size.
 
 Example:
 ```
@@ -32,14 +29,10 @@ write-combining 6 3
 write-combining 6 6 
 ```
 
-It is tricky to demonstrate this effect, but I think that this program's slowdown
-can be explained by it. On my computer `count 6, increment 3` is consistently faster than `count 6, increment 6`
-even though it does more work (increments the loop counter twice instead of once per each element) and
-has more LLC and L1i cache misses (measured by `perf stat`, YMMV). The effect depends on the
-number of write combine buffers in your CPU, common number is somewhere between 4 and 10.
-I suggest trying combinations `6/3, 6/6, 8/4, 8/8` and so on.
-However I suspect that this slowdown could also have something to do with the number of streams that the hardware
-prefetcher can follow.
+Modern Intel CPUs have around 10 WC buffers. When you allocate 16 arrays and use increments 1-16, you should see
+a large performance drop at some point. The first few increments should be slower, since they are executing more loops
+and thus they will are doing more work (iterating through a loop introduces some overhead, namely incrementing the
+index variable, branching and jumping).
 
 
 You can use the provided `benchmark.py` script to test various `array-count/write-increment` combinations

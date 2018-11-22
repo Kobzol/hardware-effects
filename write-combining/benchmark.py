@@ -11,11 +11,11 @@ from utils import benchmark
 
 
 data = [
-    ("Count", [6]),
-    ("Increment", list(range(1, 7)))
+    ("Count", [16]),
+    ("Increment", list(range(1, 16)))
 ]
 
-frame = benchmark(data, pin_to_cpu=True)
+frame = benchmark(data, pin_to_cpu=True, repeat=2)
 
-seaborn.barplot(data=frame, x="Count", y="Time", hue="Increment")
+seaborn.barplot(data=frame, x="Increment", y="Time", hue="Count")
 plt.show()

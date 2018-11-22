@@ -6,7 +6,7 @@
 #include <cstring>
 #include <xmmintrin.h>
 
-#define ARRAY_SIZE 8 * 1024 * 1024
+#define ARRAY_SIZE 2 * 1024 * 1024
 #define REPEAT 20
 
 using Type = size_t;
@@ -43,7 +43,7 @@ int main(int argc, char** argv)
     std::vector<std::unique_ptr<Type[]>> arrays;
     for (int i = 0; i < arrayCount; i++)
     {
-        arrays.emplace_back(new Type[ARRAY_SIZE]);
+        arrays.emplace_back(new Type[ARRAY_SIZE]());
     }
 
     auto start = Clock::now();
@@ -57,8 +57,7 @@ int main(int argc, char** argv)
                 for (int i = region.first; i < region.second; i++)
                 {
                     // non-temporal store, bypasses cache
-                    // _mm_stream_pi((__m64*) &arrays[i][l], reinterpret_cast<__m64>(static_cast<Type>(l)));
-                    arrays[i][l] = static_cast<Type>(l);
+                    _mm_stream_pi((__m64*) &arrays[i][l], reinterpret_cast<__m64>(static_cast<Type>(l)));
                 }
             }
         }
