@@ -19,6 +19,7 @@ Currently the following effects are demonstrated:
 - cache/memory hierarchy bandwidth
 - data dependencies
 - denormal floating point numbers
+- DRAM refresh interval
 - false sharing
 - hardware prefetching
 - memory-bound program

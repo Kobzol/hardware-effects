@@ -8,6 +8,10 @@ import __main__
 import pandas
 
 
+def get_executable():
+    return os.path.realpath(sys.argv[1])
+
+
 def get_args(executable, parameters, pin_to_cpu):
     args = []
 
@@ -23,12 +27,22 @@ def get_args(executable, parameters, pin_to_cpu):
     return args
 
 
+def run_repeatable(executable, repeat, parameters, pin_to_cpu):
+    args = get_args(executable, parameters, pin_to_cpu)
+
+    for i in range(repeat):
+        res = subprocess.run(args,
+                             stdout=subprocess.PIPE,
+                             stderr=subprocess.PIPE)
+        yield res.stderr.decode().strip()
+
+
 def benchmark(input_data, pin_to_cpu=False, repeat=5, y_axis="Time"):
     if len(sys.argv) < 2:
         print("Usage: python3 {} <path-to-executable>".format(__main__.__file__))
         exit(1)
 
-    executable = os.path.realpath(sys.argv[1])
+    executable = get_executable()
 
     keys = [d[0] for d in input_data]
     inputs = itertools.product(*[d[1] for d in input_data])
@@ -36,14 +50,7 @@ def benchmark(input_data, pin_to_cpu=False, repeat=5, y_axis="Time"):
     frame = pandas.DataFrame(columns=keys + [y_axis])
 
     for values in inputs:
-        args = get_args(executable, values, pin_to_cpu)
-        times = []
-
-        for i in range(repeat):
-            res = subprocess.run(args,
-                                 stdout=subprocess.PIPE,
-                                 stderr=subprocess.PIPE)
-            times.append(float(res.stderr.decode().strip()))
+        times = [float(res) for res in run_repeatable(executable, repeat, values, pin_to_cpu)]
         value = sum(times) / len(times)
 
         data = ["{}: {}".format(key, value) for (key, value) in zip(keys, values)]
