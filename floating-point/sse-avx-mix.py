@@ -1,0 +1,19 @@
+import os
+import sys
+
+import matplotlib.pyplot as plt
+import seaborn
+
+ROOT = os.path.realpath(os.path.join(os.path.dirname(__file__), "../"))
+sys.path.append(ROOT)
+from utils import benchmark
+
+
+data = [
+    ("ZeroUpper", [0, 1])
+]
+
+frame = benchmark(data, pin_to_cpu=True)
+
+g = seaborn.barplot(data=frame, x="ZeroUpper", y="Time")
+plt.show()
