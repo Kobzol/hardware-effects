@@ -7,7 +7,7 @@
 #include <cstring>
 #include <xmmintrin.h>
 
-#if defined(__clang__)
+#if defined(__clang__) || defined(__INTEL_COMPILER)
 using _mm_hint = uint8_t;
 #endif
 
