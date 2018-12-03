@@ -41,6 +41,11 @@ If you have a better explanation of what is happening, please let me know in the
 Ideally the code should be written in assembly, however that would lower it's readability.
 I wrote it in C++ in a way that (hopefully) forces the compiler to emit the instructions that I want (even with -O3).
 
+For all benchmarks I recommend to turn off CPU scaling:
+```
+$ sudo cpupower frequency-set --governor performance
+```
+
 ### Build
 ```bash
 $ mkdir build
