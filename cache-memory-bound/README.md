@@ -14,7 +14,7 @@ with `increment=2` every other integer will be accessed, with `increment=16` onl
 accessed etc.
 
 Naturally one could expect that when you only multiply half of the array, it will be roughly two times faster, when you
-only multiply one eighth of the array, it will be eigth times faster because the program is doing only a fraction
+only multiply one eighth of the array, it will be eight times faster because the program is doing only a fraction
 of the work. However here that is not the case, because most of the program time is spent in actually fetching data from
 and to memory, not by multiplying (hence it is called memory-bound).
 
