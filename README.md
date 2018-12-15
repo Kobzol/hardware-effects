@@ -6,7 +6,7 @@ be understood easily.
 
 Those effects obviously depend heavily on your CPU microarchitecture and model,
 so the demonstration programs may not showcase the slowdown on your CPU, but I try to make
-them as general as I can. That said, the examples are targeting x86-x64 processors (Intel and AMD)
+them as general as I can. That said, the examples are targeting x86-64 processors (Intel and AMD)
 and may not make sense on other CPU architectures. I try to make them compatible
 with Windows, but they are mainly tested on Linux.
 
@@ -38,7 +38,7 @@ so for example I left out NUMA effects.
 Isolating those hardware effects can be very tricky, so it's possible that some of the
 examples are actually demonstrating something entirely else (or nothing at all :) ).
 If you have a better explanation of what is happening, please let me know in the issues.
-Ideally the code should be written in assembly, however that would lower it's readability.
+Ideally the code should be written in assembly, however that would lower its readability.
 I wrote it in C++ in a way that (hopefully) forces the compiler to emit the instructions that I want (even with -O3).
 
 For all benchmarks I recommend to turn off CPU scaling:
