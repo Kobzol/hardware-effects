@@ -1,11 +1,12 @@
-## Cache aliasing
-This example demonstrates aliasing in the CPU cache.
+## Cache conflicts
+This example demonstrates address conflicts that can occur in the CPU cache.
 CPU caches are basically hardware hash tables, so they suffer from hash table conflicts.
 They are usually implemented as N-way associative caches, which means
 that they have place for N cache lines in each hash bucket.
 
 If you access memory in specific address intervals and repeatedly put
-more cache lines into the bucket than it can hold, you can observe significant slowdown. 
+more cache lines into the bucket than it can hold, you can observe significant slowdown since
+the cache will thrash and evict a cache line on every access.
 
 If you're on Linux, you can get the associativity of your cache (the `N`) by using getconf.
 ```
@@ -30,7 +31,7 @@ You can see a graphical explanation of cache associativity here: http://csillust
 
 Usage:
 ```bash
-$ cache-aliasing <count> <increment>
+$ cache-conflicts <count> <increment>
 ```
 
 The program will write many times to `count` 4-byte integers, each of which will be `increment` bytes apart.

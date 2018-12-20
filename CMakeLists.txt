@@ -6,7 +6,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
 
 add_subdirectory(bandwidth-saturation)
 add_subdirectory(branch-misprediction)
-add_subdirectory(cache-aliasing)
+add_subdirectory(cache-conflicts)
 add_subdirectory(cache-hierarchy-bandwidth)
 add_subdirectory(cache-memory-bound)
 add_subdirectory(data-dependency)

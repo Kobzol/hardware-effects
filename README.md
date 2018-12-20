@@ -15,7 +15,7 @@ Currently the following effects are demonstrated:
 - bandwidth saturation
 - branch misprediction
 - branch target misprediction
-- cache aliasing
+- cache conflicts
 - cache/memory hierarchy bandwidth
 - data dependencies
 - denormal floating point numbers

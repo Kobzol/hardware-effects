@@ -20,7 +20,7 @@ slower, because the memory bus will not be able to serve all of the cores at ful
 
 With classic writes the effect will be much worse, because not only will the threads share the memory bandwidth,
 they will also pollute and thrash the caches (both L3 for all cores and L1/L2 for SMT hyper-threads). This is amplified
-by the fact that the allocated arrays are large and are thus allocated at page boundaries, which causes cache aliasing
+by the fact that the allocated arrays are large and are thus allocated at page boundaries, which causes cache conflicts
 between the individual thread arrays. This is a good use-case for non-temporal stores.
 
 The bandwidth effect should be even more visible if vector (SSE, AVX) instructions were used.
