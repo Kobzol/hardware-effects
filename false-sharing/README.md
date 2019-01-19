@@ -25,8 +25,14 @@ You should observe significant slowdown when using `increment 1` with more than 
 On the other hand if every thread gets its own cache line (`increment 8`), the time shouldn't
 change much if you keep adding threads (up to the point where you spawn more threads than you have logical cores of course).
 
-Turn off Hyper-threading for benchmarking this. If two threads are allocated on the same core,
+I recommend to turn off Hyper-threading for benchmarking this. If two threads are allocated on the same core,
 this effect will be gone.
+
+```bash
+echo 0 > /sys/devices/system/cpu/cpu4/online
+echo 0 > /sys/devices/system/cpu/cpu5/online
+...
+```
 
 False sharing can be measured by counting the number of Requests-for-ownership in the L2 cache.
 RFOs are messages that invalidate a cache line in other cores because some other core wants to write to it.
