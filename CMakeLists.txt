@@ -4,6 +4,7 @@ project(hardware-effects)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -pedantic")
 
+add_subdirectory(4k-aliasing)
 add_subdirectory(bandwidth-saturation)
 add_subdirectory(branch-misprediction)
 add_subdirectory(cache-conflicts)

@@ -49,7 +49,7 @@ size_t test_memory(const std::vector<Type*>& memory, int distance)
 
 int main(int argc, char** argv)
 {
-    if (argc < 3)
+    if (argc < 4)
     {
         std::cout << "Usage: software-prefetching <prefetch> <distance> <hint>" << std::endl;
         return 1;
