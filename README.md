@@ -7,8 +7,9 @@ be understood easily.
 Those effects obviously depend heavily on your CPU microarchitecture and model,
 so the demonstration programs may not showcase the slowdown on your CPU, but I try to make
 them as general as I can. That said, the examples are targeting x86-64 processors (Intel and AMD)
-and may not make sense on other CPU architectures. I try to make them compatible
-with Windows, but they are mainly tested on Linux.
+and may not make sense on other CPU architectures. I focus on effects that should be observable on
+commodity (desktop/notebook) hardware, so I don't include things like NUMA effects here
+(although in a few years they might be common even in personal computers). The code is mainly tested on Linux.
 
 Currently the following effects are demonstrated:
 
@@ -30,11 +31,6 @@ Currently the following effects are demonstrated:
 - write combining
 
 Every example directory has a README that explains the individual effects.
-
-All programs print measured results (execution time, bandwidth) to the standard error output (`stderr`).
-
-I try to focus on effects that should be observable on commodity (desktop/notebook) hardware,
-so for example I left out NUMA effects.
 
 Isolating those hardware effects can be very tricky, so it's possible that some of the
 examples are actually demonstrating something entirely else (or nothing at all :) ).
