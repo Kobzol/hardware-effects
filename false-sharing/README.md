@@ -25,6 +25,25 @@ You should observe significant slowdown when using `increment 1` with more than 
 On the other hand if every thread gets its own cache line (`increment 8`), the time shouldn't
 change much if you keep adding threads (up to the point where you spawn more threads than you have logical cores of course).
 
+Turn off Hyper-threading for benchmarking this. If two threads are allocated on the same core,
+this effect will be gone.
+
+False sharing can be measured by counting the number of Requests-for-ownership in the L2 cache.
+RFOs are messages that invalidate a cache line in other cores because some other core wants to write to it.
+You can also measure the number of times a cache line was loaded into the L1 cache.
+
+```bash
+$  perf stat -e l2_rqsts.all_rfo,l1d.replacement false-sharing 3 1
+572
+21 626 086    l2_rqsts.all_rfo
+25 142 511    l1d.replacement
+
+$  perf stat -e l2_rqsts.all_rfo,l1d.replacement false-sharing 3 8
+389
+    14 183    idq.ms_switches
+    64 585    fp_assist.any
+```
+
 You can use the provided `benchmark.py` script to test various `thread-count/increment` combinations
 and plot their relative speeds.
 

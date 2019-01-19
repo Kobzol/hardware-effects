@@ -5,18 +5,20 @@
 #include <vector>
 #include <cstring>
 
-#define REPEAT 1024 * 1024 * 100UL
+#define REPEAT 1024 * 1024 * 256UL
 
 using Type = size_t;
 
-void thread_fn(int tid, int increment, size_t repeat, Type* memory, int size)
+void thread_fn(int tid, int increment, Type* memory, int size)
 {
     int target = tid * increment;
 
-    for (size_t i = 0; i < repeat; i++)
+    for (size_t r = 0; r < REPEAT; r++)
     {
-        // force memory access, memory clobber or assembly can also help
-        std::memset(memory + target, i, size);
+        for (int i = 0; i < size; i++)
+        {
+            memory[target + i]++;
+        }
     }
 }
 
@@ -37,7 +39,7 @@ int main(int argc, char** argv)
 #ifdef _MSC_VER
     memory = _aligned_malloc(totalSize, 64);
 #else
-    // try to allocate 64-byte aligned memory to make sure that we start on a cache line beginning
+    // try to allocate 64-byte aligned memory to make sure that we start on a cache line boundary
     if (posix_memalign((void**) &memory, 64, totalSize))
     {
         std::cerr << "Couldn't allocate memory" << std::endl;
@@ -52,7 +54,7 @@ int main(int argc, char** argv)
     std::vector<std::thread> threads;
     for (int i = 0; i < threadCount; i++)
     {
-        threads.emplace_back(thread_fn, i, increment, REPEAT, memory, sizeof(Type));
+        threads.emplace_back(thread_fn, i, increment, memory, 1);
     }
 
     for (auto& thread : threads)
@@ -60,7 +62,6 @@ int main(int argc, char** argv)
         thread.join();
     }
 
-    std::cout << memory[0] << std::endl;
     std::cerr << std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - start).count() << std::endl;
 
 #ifdef _MSC_VER

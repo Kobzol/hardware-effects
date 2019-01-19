@@ -43,6 +43,7 @@ $  perf stat -e idq.ms_switches,fp_assist.any denormals 0 0.3
 694
 111 770 619   idq.ms_switches
  15 728 640   fp_assist.any
+```
 
 You can run the Python benchmark script to plot how the time depends on the `flush` mode and `value`.
 ```bash

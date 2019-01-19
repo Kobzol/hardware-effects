@@ -11,7 +11,7 @@ from utils import benchmark
 
 
 data = [
-    ("Threads", [1, 2, 3, 4, 5, 6, 7, 8]),
+    ("Threads", [1, 2, 3, 4]),
     ("Increment", [1, 8])
 ]
 
