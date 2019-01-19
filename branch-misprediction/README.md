@@ -12,15 +12,15 @@ Usage:
 $ branch-misprediction <sort>
 ```
 
-The `branch-misprediction` program will fill a large array with uniformly distributed random integers from 1 to 100.
-Then it will repeatedly go through the whole array and sum elements that are smaller than 50. If `sort` equals 1,
+The `branch-misprediction` program will fill a large array with uniformly distributed random numbers from 1 to 10.
+Then it will repeatedly go through the whole array and sum elements that are smaller than 6. If `sort` equals 1,
 the array will be sorted in ascending order at the beginning of the program. If `sort` equals 0 the array will not be sorted.
 
-If the array is sorted, the branch predictor will learn very quickly that it should expect the `array[i] < 50`
-condition to be true in the first half of the array and false in the second half. I disabled inlining of the
-condition body so that the compiler can't do tricks like using CMOV so a misprediction costs a lot.
-If you don't observe a large performance difference between the sort/nosort scenarios, make sure that your
-compiler is not inlining the `handle_sum` function call.
+If the array is sorted, the branch predictor will learn very quickly that it should expect the `array[i] < 6`
+condition to be true in the first half of the array and false in the second half. I used floats, therefore the
+compiler can't use CMOV (you can try it with an integer, then there should be no difference).
+If you don't observe a large performance difference between the sort/nosort scenarios, make sure that your compiler
+is not doing any vector tricks with the if followed by the sum.
 
 The branch miss count can be easily observed with `perf`. Here's how it looks on my computer:
 ```bash
@@ -34,8 +34,7 @@ $  perf stat -e branch-misses branch-misprediction 1
 ```
 The program has more than two times more branch mispredictions without the sort and runs almost six times slower.
 It's actually much faster even when counting the time to sort the array.
-There will probably be a point where the array is too large and it's no longer
-faster to sort it.
+There will probably be a point where the array is too large and it's no longer faster to sort it.
 
 ## Branch target misprediction
 Usage:

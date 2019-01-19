@@ -8,20 +8,11 @@
 #define REPETITIONS 20
 #define SIZE 20 * 1024 * 1024
 
-#ifdef _WIN32
-#define NOINLINE __declspec(noinline)
-#else
-#define NOINLINE __attribute__ ((noinline))
-#endif
+using Type = float;
 
-void NOINLINE handle_sum(size_t* sum, const int* memory)
+Type test_memory(const std::vector<Type>& memory, Type value)
 {
-    *sum += *memory;
-}
-
-size_t test_memory(const std::vector<int>& memory, int value)
-{
-    size_t sum = 0;
+    Type sum = 0;
     size_t size = memory.size();
 
     using Clock = std::chrono::steady_clock;
@@ -31,7 +22,10 @@ size_t test_memory(const std::vector<int>& memory, int value)
     {
         for (size_t j = 0; j < size; j++)
         {
-            if (memory[j] < value) handle_sum(&sum, memory.data() + j);
+            if (memory[j] < value)
+            {
+                sum += memory[j];
+            }
         }
     }
 
@@ -47,12 +41,11 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    std::default_random_engine rng;
-    rng.seed(std::random_device()());
-    std::uniform_int_distribution<int> dist(1, 100);
+    std::default_random_engine rng(0);
+    std::uniform_int_distribution<int> dist(1, 10);
 
-    std::vector<int> data(SIZE);
-    std::generate(std::begin(data), std::end(data), [&dist, &rng](){
+    std::vector<Type> data(SIZE);
+    std::generate(std::begin(data), std::end(data), [&dist, &rng]() {
         return dist(rng);
     });
 
@@ -61,7 +54,7 @@ int main(int argc, char** argv)
         std::sort(data.begin(), data.end());
     }
 
-    test_memory(data, 50);
+    test_memory(data, 6);
 
     return 0;
 }
