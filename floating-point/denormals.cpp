@@ -1,14 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
-#include <memory>
 #include <random>
-#include <algorithm>
-#include <xmmintrin.h>
+#include <immintrin.h>
 
-#define REPETITIONS 10
-#define SIZE 16 * 1024 * 1024
-#define CSR_FLUSH_TO_ZERO (1 << 15)
+#define REPETITIONS 100
+#define SIZE 4 * 1024 * 1024
 
 using Type = float;
 
@@ -43,12 +40,10 @@ int main(int argc, char** argv)
 
     if (flush == 1)
     {
-        unsigned csr = _mm_getcsr();
-        csr |= CSR_FLUSH_TO_ZERO;
-        _mm_setcsr(csr);
+        _mm_setcsr(_mm_getcsr() | 0x8040);
     }
 
-    std::vector<Type> data(SIZE, value);
+    std::vector<Type> data(SIZE, 1);
     test_memory(data, value);
 
     return 0;

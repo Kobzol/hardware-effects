@@ -8,8 +8,9 @@ In the standard form, the floating point numbers are represented as `h.s * 2^e`,
 `e` is the exponent and `h` is the hidden bit. Most floating point numbers
 (except for negative and positive zeros) have the `h` bit set to one. However there is also a set of so-called denormal
 numbers that are very small (near the zero) and have the hidden bit set to zero.
-Performing some arithmetic operations on such numbers can cause severe performance degradation because they either
-have to be handled in software (the operating system) or they take the hardware slow path.
+Performing some arithmetic operations on such numbers can cause severe performance degradation. The Intel designers
+optimized for the fast case and denormal numbers are handled by the Microcode Sequencer, which
+is much slower than operating on classic floating point numbers in the FP execution units.
 
 Usage:
 ```bash
@@ -29,6 +30,19 @@ being multiplied by itself 10 times. For 32-bit binary floats you should start t
 0.0001 and smaller.
 
 On my CPU the program runs almost six times slower when the `value` is small and thus denormal numbers are being created.
+
+You can measure the number of times the CPU switched to microcode and also how many times
+it invoked a floating point assist.
+```bash
+$  perf stat -e idq.ms_switches,fp_assist.any denormals 0 0
+104
+939 880       idq.ms_switches
+      0       fp_assist.any
+
+$  perf stat -e idq.ms_switches,fp_assist.any denormals 0 0.3
+694
+111 770 619   idq.ms_switches
+ 15 728 640   fp_assist.any
 
 You can run the Python benchmark script to plot how the time depends on the `flush` mode and `value`.
 ```bash
