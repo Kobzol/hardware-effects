@@ -18,7 +18,7 @@ def get_args(executable, parameters, pin_to_cpu):
     if pin_to_cpu:
         if platform.system() == "Windows":
             args += ["start", "/affinity", "0x1"]
-        else:
+        elif platform.system() == "Linux":
             args += ["taskset", "0x1"]
 
     args.append(executable)
