@@ -28,6 +28,7 @@ Currently the following effects are demonstrated:
 - misaligned accesses
 - non-temporal stores
 - software prefetching
+- store buffer capacity
 - write combining
 
 Every example directory has a README that explains the individual effects.
