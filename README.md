@@ -4,6 +4,8 @@ in surprising ways and that may be very hard to explain without knowledge of the
 For each effect I try to create a proof of concept program that is as small as possible so that it can
 be understood easily.
 
+Related repository with GPU hardware effects: https://github.com/kobzol/hardware-effects-gpu
+
 Those effects obviously depend heavily on your CPU microarchitecture and model,
 so the demonstration programs may not showcase the slowdown on your CPU, but I try to make
 them as general as I can. That said, the examples are targeting x86-64 processors (Intel and AMD)
