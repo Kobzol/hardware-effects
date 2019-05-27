@@ -5,8 +5,13 @@
 #include <random>
 #include <algorithm>
 
-#define REPETITIONS 20
-#define SIZE 20 * 1024 * 1024
+#ifndef REPETITIONS
+    #define REPETITIONS 20
+#endif
+
+#ifndef SIZE
+    #define SIZE 20 * 1024 * 1024
+#endif
 
 using Type = float;
 

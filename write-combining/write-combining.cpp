@@ -7,8 +7,13 @@
 #include <cstring>
 #include <immintrin.h>
 
-#define ARRAY_SIZE 2 * 1024 * 1024
-#define REPEAT 20
+#ifndef ARRAY_SIZE
+    #define ARRAY_SIZE 2 * 1024 * 1024
+#endif
+
+#ifndef REPETITIONS
+    #define REPETITIONS 20
+#endif
 
 using Type = size_t;
 using Clock = std::chrono::steady_clock;
@@ -49,7 +54,7 @@ int main(int argc, char** argv)
 
     auto start = Clock::now();
 
-    for (int r = 0; r < REPEAT; r++)
+    for (int r = 0; r < REPETITIONS; r++)
     {
         for (auto& region: writeRegions)
         {

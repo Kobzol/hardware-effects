@@ -6,15 +6,20 @@
 #include <cstring>
 #include <xmmintrin.h>
 
-#define COUNT 16 * 1024 * 1024
-#define REPEAT 20
+#ifndef COUNT
+    #define COUNT 16 * 1024 * 1024
+#endif
+
+#ifndef REPETITIONS
+#define REPETITIONS 20
+#endif
 
 using Type = size_t;
 
 template <bool NonTemporal>
 void thread_fn(Type* items, size_t size)
 {
-    for (int i = 0; i < REPEAT; i++)
+    for (int i = 0; i < REPETITIONS; i++)
     {
         for (size_t j = 0; j < size; j++)
         {

@@ -1,7 +1,9 @@
 #include <iostream>
 #include <chrono>
 
-#define REPETITIONS 1000000
+#ifndef REPETITIONS
+    #define REPETITIONS 1000000
+#endif
 
 // taken from https://stackoverflow.com/a/8556436/1107768
 #define REP0(X)

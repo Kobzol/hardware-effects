@@ -11,8 +11,13 @@
 using _mm_hint = uint8_t;
 #endif
 
-#define REPETITIONS 5
-#define SIZE 10 * 1024 * 1024
+#ifndef REPETITIONS
+    #define REPETITIONS 5
+#endif
+
+#ifndef SIZE
+    #define SIZE 10 * 1024 * 1024
+#endif
 
 struct Data
 {

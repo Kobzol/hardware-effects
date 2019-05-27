@@ -5,8 +5,13 @@
 #include <random>
 #include <algorithm>
 
-#define REPETITIONS 10
-#define SIZE 32 * 1024 * 1024
+#ifndef REPETITIONS
+    #define REPETITIONS 10
+#endif
+
+#ifndef SIZE
+    #define SIZE 32 * 1024 * 1024
+#endif
 
 using Type = int;
 

@@ -4,8 +4,13 @@
 #include <random>
 #include <immintrin.h>
 
-#define REPETITIONS 100
-#define SIZE 4 * 1024 * 1024
+#ifndef REPETITIONS
+    #define REPETITIONS 100
+#endif
+
+#ifndef SIZE
+    #define SIZE 4 * 1024 * 1024
+#endif
 
 using Type = float;
 

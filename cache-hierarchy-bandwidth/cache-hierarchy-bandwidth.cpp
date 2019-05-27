@@ -2,7 +2,9 @@
 #include <iostream>
 #include <vector>
 
-#define REPEAT 1000
+#ifndef REPETITIONS
+    #define REPETITIONS 1000
+#endif
 
 using Type = double;
 
@@ -15,7 +17,7 @@ void test_memory(std::vector<Type>& memory)
     Type value = rand();
     auto start = Clock::now();
 
-    for (int i = 0; i < REPEAT; i++)
+    for (int i = 0; i < REPETITIONS; i++)
     {
         for (size_t j = 0; j < size; j++)
         {
@@ -24,7 +26,7 @@ void test_memory(std::vector<Type>& memory)
     }
 
     auto time = std::chrono::duration_cast<std::chrono::microseconds>(Clock::now() - start).count();
-    auto timePerIter = time / (double) REPEAT;
+    auto timePerIter = time / (double) REPETITIONS;
     auto bytes = size * sizeof(Type);
 
     std::cerr << bytes / timePerIter << std::endl;  // MiB/s

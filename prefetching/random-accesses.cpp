@@ -4,7 +4,9 @@
 #include <algorithm>
 #include <random>
 
-#define REPETITIONS 50
+#ifndef REPETITIONS
+    #define REPETITIONS 50
+#endif
 
 using Type = int;
 

@@ -10,7 +10,9 @@
 #include <immintrin.h>
 #include <cassert>
 
-#define REPETITIONS 512 * 1024
+#ifndef REPETITIONS
+    #define REPETITIONS 512 * 1024
+#endif
 
 struct Record
 {

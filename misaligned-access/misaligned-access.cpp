@@ -5,7 +5,10 @@
 #include <cassert>
 
 #define CACHE_LINE_SIZE 64
-#define REPEAT 100 * 1024 * 1024
+
+#ifndef REPETITIONS
+    #define REPETITIONS 100 * 1024 * 1024
+#endif
 
 using Type = uint32_t;
 
@@ -16,7 +19,7 @@ void test_memory(std::vector<Type*>& memory)
     size_t size = memory.size();
     auto start = Clock::now();
 
-    for (int i = 0; i < REPEAT; i++)
+    for (int i = 0; i < REPETITIONS; i++)
     {
         for (size_t j = 0; j < size; j++)
         {

@@ -3,8 +3,13 @@
 #include <chrono>
 #include <memory>
 
-#define REPETITIONS 50
-#define SIZE 4 * 1024 * 1024
+#ifndef REPETITIONS
+    #define REPETITIONS 50
+#endif
+
+#ifndef SIZE
+    #define SIZE 4 * 1024 * 1024
+#endif
 
 using Type = double;
 

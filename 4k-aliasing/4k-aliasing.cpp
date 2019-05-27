@@ -2,8 +2,13 @@
 #include <vector>
 #include <chrono>
 
-#define SIZE 1024
-#define REPETITIONS 2 * 1024 * 1024UL
+#ifndef SIZE
+    #define SIZE 1024
+#endif
+
+#ifndef REPETITIONS
+    #define REPETITIONS 2 * 1024 * 1024UL
+#endif
 
 using Type = float;
 

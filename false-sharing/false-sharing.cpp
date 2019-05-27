@@ -5,7 +5,9 @@
 #include <vector>
 #include <cstring>
 
-#define REPEAT 1024 * 1024 * 256UL
+#ifndef REPETITIONS
+    #define REPETITIONS 1024 * 1024 * 256UL
+#endif
 
 using Type = size_t;
 
@@ -13,7 +15,7 @@ void thread_fn(int tid, int increment, Type* memory, int size)
 {
     int target = tid * increment;
 
-    for (size_t r = 0; r < REPEAT; r++)
+    for (size_t r = 0; r < REPETITIONS; r++)
     {
         for (int i = 0; i < size; i++)
         {

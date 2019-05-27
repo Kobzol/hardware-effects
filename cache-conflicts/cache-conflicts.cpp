@@ -3,7 +3,9 @@
 #include <chrono>
 #include <memory>
 
-#define REPETITIONS 10000000
+#ifndef REPETITIONS
+    #define REPETITIONS 10000000
+#endif
 
 using Type = int;
 

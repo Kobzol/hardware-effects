@@ -6,7 +6,9 @@
 #include <iostream>
 #include <chrono>
 
-#define REPETITIONS 100 * 1024 * 1024
+#ifndef REPETITIONS
+    #define REPETITIONS 100 * 1024 * 1024
+#endif
 
 int main(int argc, char** argv)
 {
