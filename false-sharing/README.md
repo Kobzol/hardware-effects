@@ -46,8 +46,8 @@ $  perf stat -e l2_rqsts.all_rfo,l1d.replacement false-sharing 3 1
 
 $  perf stat -e l2_rqsts.all_rfo,l1d.replacement false-sharing 3 8
 389
-    14 183    idq.ms_switches
-    64 585    fp_assist.any
+    14 183    l2_rqsts.all_rfo
+    64 585    l1d.replacement
 ```
 
 You can use the provided `benchmark.py` script to test various `thread-count/increment` combinations
