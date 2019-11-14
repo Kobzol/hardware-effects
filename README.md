@@ -83,8 +83,11 @@ $ docker run hardware-effects build/branch-misprediction/branch-misprediction 1
 MIT
 
 ### Resources
+- https://software.intel.com/en-us/download/intel-64-and-ia-32-architectures-optimization-reference-manual
 - https://akkadia.org/drepper/cpumemory.pdf
 - http://igoro.com/archive/gallery-of-processor-cache-effects/
 - https://mechanical-sympathy.blogspot.com
 - https://manybutfinite.com/category/software-illustrated/
 - https://randomascii.wordpress.com/
+- https://www.agner.org/optimize/
+- https://software.intel.com/en-us/articles/intel-sdm#combined
