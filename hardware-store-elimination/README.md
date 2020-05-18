@@ -39,5 +39,5 @@ $ python3 benchmark.py <path-to-executable>
 ```
 
 You can find detailed observations about this effect at Travis Downs' blog:
-https://travisdowns.github.io/blog/2020/05/13/intel-zero-opt.html
-https://travisdowns.github.io/blog/2020/05/18/icelake-zero-opt.html
+- https://travisdowns.github.io/blog/2020/05/13/intel-zero-opt.html
+- https://travisdowns.github.io/blog/2020/05/18/icelake-zero-opt.html

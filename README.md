@@ -42,10 +42,19 @@ If you have a better explanation of what is happening, please let me know in the
 Ideally the code should be written in assembly, however that would lower its readability.
 I wrote it in C++ in a way that (hopefully) forces the compiler to emit the instructions that I want (even with -O3).
 
-For all benchmarks I recommend to turn off CPU scaling:
+### Benchmarking
+
+For all benchmarks I recommend to turn off frequency scaling, hyper-threading, Turbo mode, address space randomization and
+other stuff that can increase noise. I'm using the following commands:
 ```bash
-$ sudo cpupower frequency-set --governor performance
+$ sudo bash -c "echo 0 > /proc/sys/kernel/randomize_va_space"           # address randomization
+$ sudo bash -c "echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo" # Turbo mode
+$ sudo bash -c "echo 0 > /sys/devices/system/cpu/cpuX/online"           # hyper-threading
+$ ...                                                                   # for all hyper-threading CPUs
+$ sudo cpupower frequency-set --governor performance                    # frequency scaling
 ```
+
+You can find more tips [here](https://llvm.org/docs/Benchmarking.html).
 
 ### Build
 ```bash
