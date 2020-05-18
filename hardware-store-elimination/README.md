@@ -4,7 +4,7 @@ that try to delay or avoid writes to RAM as long as possible. When there is no s
 cache line has been modified, it needs to be evicted and written back to a higher cache level or to RAM.
 
 Intuitively, this process does not depend on the actual value of the cache line, it should be just opaque data for the processor.
-However, Travis Down [has found out](https://travisdowns.github.io/blog/2020/05/13/intel-zero-opt.html) that client Skylake Intel
+However, Travis Downs [has found out](https://travisdowns.github.io/blog/2020/05/13/intel-zero-opt.html) that client Skylake Intel
 microarchitectures (Skylake, Kaby Lake, Coffee Lake, Whiskey Lake, ...) seem to use a peculiar heuristic that sometimes skips
 the writeback to memory when the value of the cache line is exactly zero. (Repeatedly) writing zeros to memory can thus
 potentially achieve higher bandwidth than writing other values.
