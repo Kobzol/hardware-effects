@@ -3,6 +3,7 @@ import os
 import platform
 import subprocess
 import sys
+from collections import defaultdict
 
 import __main__
 import pandas
@@ -47,19 +48,20 @@ def benchmark(input_data, pin_to_cpu=False, repeat=5, y_axis="Time"):
     keys = [d[0] for d in input_data]
     inputs = itertools.product(*[d[1] for d in input_data])
 
-    frame = pandas.DataFrame(columns=keys + [y_axis])
+    rows = defaultdict(lambda: [])
 
     for values in inputs:
         times = [float(res) for res in run_repeatable(executable, repeat, values, pin_to_cpu)]
-        value = sum(times) / len(times)
+        average = sum(times) / len(times)
 
-        data = ["{}: {}".format(key, value) for (key, value) in zip(keys, values)]
-        data.append("{}: {}".format(y_axis, value))
+        data = ["{}: {}".format(key, average) for (key, average) in zip(keys, values)]
+        data.append("{}: {}".format(y_axis, average))
 
         print(", ".join(data))
 
-        result = {key: values[index] for (index, key) in enumerate(keys)}
-        result[y_axis] = value
+        for time in times:
+            rows[y_axis].append(time)
+            for (index, key) in enumerate(keys):
+                rows[key].append(values[index])
 
-        frame = frame.append(result, ignore_index=True)
-    return frame
+    return pandas.DataFrame(rows)

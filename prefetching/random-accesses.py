@@ -8,7 +8,6 @@ ROOT = os.path.realpath(os.path.join(os.path.dirname(__file__), "../"))
 sys.path.append(ROOT)
 from utils import benchmark
 
-
 KiB = 1024
 MiB = KiB ** 2
 
@@ -20,5 +19,6 @@ data = [
 
 frame = benchmark(data, pin_to_cpu=True)
 
-seaborn.lineplot(x="Size", y="Time", hue="Shuffle", data=frame)
+ax = seaborn.lineplot(x="Size", y="Time", hue="Shuffle", data=frame)
+ax.set(ylabel="Time [µs]")
 plt.show()

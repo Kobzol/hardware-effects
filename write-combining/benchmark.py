@@ -4,11 +4,9 @@ import sys
 import matplotlib.pyplot as plt
 import seaborn
 
-
 ROOT = os.path.realpath(os.path.join(os.path.dirname(__file__), "../"))
 sys.path.append(ROOT)
 from utils import benchmark
-
 
 data = [
     ("Count", [16]),
@@ -17,5 +15,6 @@ data = [
 
 frame = benchmark(data, pin_to_cpu=True, repeat=2)
 
-seaborn.barplot(data=frame, x="Increment", y="Time", hue="Count")
+ax = seaborn.barplot(data=frame, x="Increment", y="Time", hue="Count")
+ax.set(ylabel="Time [ms]")
 plt.show()

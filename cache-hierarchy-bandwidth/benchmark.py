@@ -8,12 +8,11 @@ ROOT = os.path.realpath(os.path.join(os.path.dirname(__file__), "../"))
 sys.path.append(ROOT)
 from utils import benchmark
 
-
 data = [
     ("Size", [16 * 1024,
               32 * 1024,
               36 * 1024,
-              66 * 1024,
+              48 * 1024,
               128 * 1024,
               256 * 1024,
               512 * 1024,
@@ -29,7 +28,8 @@ data = [
 ]
 
 frame = benchmark(data, pin_to_cpu=True, y_axis="Bandwidth")
+frame["Size"] = frame["Size"] // 1024
 
-
-seaborn.barplot(data=frame, x="Size", y="Bandwidth")
+ax = seaborn.barplot(data=frame, x="Size", y="Bandwidth")
+ax.set(ylabel="Bandwidth [MiB/s]", xlabel="Size [KiB]")
 plt.show()

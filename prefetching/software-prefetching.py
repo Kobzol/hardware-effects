@@ -8,7 +8,6 @@ ROOT = os.path.realpath(os.path.join(os.path.dirname(__file__), "../"))
 sys.path.append(ROOT)
 from utils import benchmark
 
-
 data = [
     ("Prefetch", [1]),
     ("Distance", [1, 5, 10, 15, 20]),
@@ -18,11 +17,12 @@ data = [
 frame = benchmark(data, pin_to_cpu=True, repeat=2)
 
 
-def draw_boxplot(**kw):
-    df = kw["data"][["Time", "Distance"]]
+def draw_boxplot(data, **kw):
+    df = data[["Time", "Distance"]]
     seaborn.lineplot(x=df["Distance"], y=df["Time"])
 
 
 fg = seaborn.FacetGrid(frame, col='Hint')
-fg.map_dataframe(draw_boxplot)
+ax = fg.map_dataframe(draw_boxplot)
+ax.set(ylabel="Time [ms]", xlabel="Distance")
 plt.show()

@@ -24,7 +24,7 @@ void test_memory(std::vector<Type>& memory, size_t increment)
         }
     }
 
-    std::cerr << std::chrono::duration_cast<std::chrono::microseconds>(Clock::now() - start).count() << std::endl;
+    std::cerr << std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - start).count() << std::endl;
 }
 
 
