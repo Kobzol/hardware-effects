@@ -37,7 +37,7 @@ $ cache-conflicts <count> <increment>
 The program will write many times to `count` 4-byte integers, each of which will be `increment` bytes apart.
 On my Intel CPU I can observe a significant slowdown when going with `count` over 8 and using `increment` 4096.
 
-You can observe this effects by checking the `l1d.replacement` performance counter:
+You can observe this effect by checking the `l1d.replacement` performance counter:
 
 ```bash
 $  perf stat -e l1d.replacement cache-conflicts 8 4096

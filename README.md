@@ -26,6 +26,7 @@ Currently the following effects are demonstrated:
 - DRAM refresh interval
 - false sharing
 - hardware prefetching
+- hardware store elimination
 - memory-bound program
 - misaligned accesses
 - non-temporal stores
