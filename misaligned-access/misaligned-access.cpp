@@ -42,12 +42,12 @@ int main(int argc, char** argv)
 
     Type* memory;
 
-    // allocated two cache lines worth of Type
-    size_t size = sizeof(Type) * (CACHE_LINE_SIZE / sizeof(Type)) * 2;
+    // allocated two cache lines
+    size_t size = CACHE_LINE_SIZE * 2;
 #ifdef _MSC_VER
-    memory = _aligned_malloc(size, 64);
+    memory = _aligned_malloc(size, CACHE_LINE_SIZE);
 #else
-    if (posix_memalign((void**) &memory, 64, size))
+    if (posix_memalign((void**) &memory, CACHE_LINE_SIZE, size))
     {
         std::cerr << "Couldn't allocate memory" << std::endl;
         return 1;
