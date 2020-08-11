@@ -3,30 +3,28 @@
 #include <vector>
 #include <cstdint>
 #include <cassert>
+#include <xmmintrin.h>
 
 #define CACHE_LINE_SIZE 64
 
 #ifndef REPETITIONS
-    #define REPETITIONS 100 * 1024 * 1024
+#define REPETITIONS 100 * 1024 * 1024
 #endif
 
-using Type = uint32_t;
+using Type = double;
 
 void test_memory(std::vector<Type*>& memory)
 {
     using Clock = std::chrono::steady_clock;
-
     size_t size = memory.size();
+
     auto start = Clock::now();
 
     for (int i = 0; i < REPETITIONS; i++)
     {
-        for (size_t j = 0; j < size; j++)
-        {
-            *memory[j] += j;
-        }
+        _mm_stream_pi((__m64*)(memory[0]), reinterpret_cast<__m64>(0));
+        //*memory[j] += j;
     }
-
     std::cerr << std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - start).count() << std::endl;
 }
 
