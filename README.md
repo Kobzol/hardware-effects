@@ -4,6 +4,8 @@ in surprising ways and that may be very hard to explain without knowledge of the
 For each effect I try to create a proof of concept program that is as small as possible so that it can
 be understood easily.
 
+You can check out my [talk](https://www.youtube.com/watch?v=ICKIMHCw--Y) about hardware effects from the Meeting C++ 2019 conference.
+
 Related repository with GPU hardware effects: https://github.com/kobzol/hardware-effects-gpu
 
 Those effects obviously depend heavily on your CPU microarchitecture and model,
